@@ -42,6 +42,10 @@ app.use(function(err, req, res, next) {
  const server=http.createServer(app)
 
 server.listen(process.env.port,()=>{
-connecttoMongoDB()
-  console.log("app is running on port 5000")
+ connecttoMongoDB()
+  
+ 
+ 
+ console.log("app is running on port 5000")
+ 
 })
