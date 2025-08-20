@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/fowfa', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +44,6 @@ app.use(function(err, req, res, next) {
 server.listen(process.env.port,()=>{
  connecttoMongoDB()
   
- 
  
  console.log("app is running on port 5000")
  
