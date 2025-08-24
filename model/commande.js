@@ -1,8 +1,10 @@
 const mongoose=require('mongoose')
-const commandeschema =new mongoose.Schema({
-    Name : String,
-    lastname :String,
-    email : String ,
-    password : String,
-    telephone : String
-})
+const CommandeSchema = new mongoose.Schema({
+  paniers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Panier" }], // plusieurs paniers
+  prix: Number,
+  date: { type: Date, default: Date.now },
+  etat: { type: String, enum: ["en attente", "payée", "livrée"], default: "en attente" }
+});
+
+module.exports = mongoose.model("commande", CommandeSchema);
+
