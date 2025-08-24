@@ -3,7 +3,7 @@ const router = express.Router();
 const commandeController = require("../controller/commandec");
 
 // GET all commandes
-router.get("/", commandeController.getAll);
+router.get("/commande", commandeController.getAll);
 
 // GET one commande by id
 router.get("/:id", commandeController.getOne);
