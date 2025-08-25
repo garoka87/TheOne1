@@ -3,12 +3,12 @@ const mongoose=require('mongoose')
 const bcrypt =require('bcrypt')
 const Usershema =new mongoose.Schema({
 
-    Name :String,
-    lastname  :String,
+    Name :{type :String},
+    lastname  :{type :String},
     email :{type :String ,unique : true , lowercase : false },
     password :{type :String,minlength : 6},
     telephone :{type :Number, length : 8},
-    role :{type :String ,enum:["admin","user"]},
+    role :{type :String ,enum:["admin","user"], default :"User"},
     image :{type :String , default : "tt.jpg" },
 
     statu :{type :Boolean, default : false }
