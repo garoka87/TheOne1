@@ -13,5 +13,11 @@ router.put("/updateuser/:id", userController.update);
 
 // DELETE user by id
 router.delete("/delete/:id", userController.Delete);
+router.get("/rech/:Name", userController.searchByName);
+router.get("/triee/:order", userController.sortByName);
+router.get("/triee", userController.sortByName);
+
+
+
 
 module.exports = router;

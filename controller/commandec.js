@@ -34,17 +34,37 @@ module.exports.getOne = async (req, res) => {
 };
 
 // ✅ CREATE (ajouter une commande avec plusieurs paniers)
+
+
 module.exports.AddCommande = async (req, res) => {
   try {
     const { user, paniers, prix, etat } = req.body;
 
+    // récupérer les paniers envoyés
+    const paniersDocs = await Panier.find({ _id: { $in: paniers } });
+
+    
+
+    // vérifier que tous les paniers appartiennent au même user
+    const paniersInvalides = paniersDocs.filter(p => p.user.toString() !== user);
+
+    if (paniersInvalides.length > 0) {
+      return res.status(400).json({
+        message: "Certains paniers n'appartiennent pas à l'utilisateur fourni"
+      });
+    }
+
+    // ✅ tous les paniers sont valides → créer commande
     const newCommande = new Commande({ user, paniers, prix, etat });
     const savedCommande = await newCommande.save();
+
     res.status(201).json(savedCommande);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 // ✅ UPDATE (modifier une commande)
 module.exports.updateCommande = async (req, res) => {

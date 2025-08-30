@@ -9,7 +9,7 @@ router.get("/prod", produitController.getAll);
 router.get("/:id", produitController.getOne);
 
 // POST (ajout produit)
-router.post("/", produitController.AddProduit);
+router.post("/create", produitController.AddProduit);
 
 // PUT (modifier produit)
 router.put("/:id", produitController.updateProduit);

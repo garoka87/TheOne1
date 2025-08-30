@@ -8,7 +8,7 @@ const Usershema =new mongoose.Schema({
     email :{type :String ,unique : true , lowercase : false },
     password :{type :String,minlength : 6},
     telephone :{type :Number, length : 8},
-    role :{type :String ,enum:["admin","user"], default :"User"},
+    role :{type :String ,enum:["admin","user"], default :"user"},
     image :{type :String , default : "tt.jpg" },
 
     statu :{type :Boolean, default : false }

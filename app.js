@@ -16,6 +16,7 @@ var commandesRouter = require('./routes/commander');
 var livraisonroute = require('./routes/livraisonrout');
 var panierRoute=require('./routes/panierr');
 var produitsRouter = require('./routes/produitr');
+var recRputer = require('./routes/reclamation');
 
 
 var app = express();
@@ -32,6 +33,8 @@ app.use('/Commande',commandesRouter);
 app.use('/produit',produitsRouter);
 app.use('/panier',panierRoute);
 app.use('/livraison',livraisonroute);
+app.use('/reclamtation',recRputer);
+
 
 
 // catch 404 and forward to error handler

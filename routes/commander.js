@@ -9,7 +9,7 @@ router.get("/commande", commandeController.getAll);
 router.get("/:id", commandeController.getOne);
 
 // POST (ajout commande)
-router.post("/", commandeController.AddCommande);
+router.post("/ADD", commandeController.AddCommande);
 
 // PUT (modifier commande)
 router.put("/:id", commandeController.updateCommande);

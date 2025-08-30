@@ -9,7 +9,7 @@ router.get("/panier", commandeController.getAll);
 router.get("/:id", commandeController.getOne);
 
 // POST (ajout commande)
-router.post("/", commandeController.addPanier);
+router.post("/create", commandeController.addPanier);
 
 // PUT (modifier commande)
 router.put("/:id", commandeController.updatePanier);

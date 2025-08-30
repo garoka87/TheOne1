@@ -59,3 +59,33 @@ module.exports.Delete = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// ✅ RECHERCHE par Name
+module.exports.searchByName = async (req, res) => {
+  try {
+    const name = req.params.Name;  // utilisation params
+    const users = await usermodel.find({
+      Name: { $regex: name, $options: "i" }
+    });
+
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+// ✅ TRIER par Name
+module.exports.sortByName = async (req, res) => {
+  try {
+    const { order } = req.query; // "asc" ou "desc"
+    const sortOrder = order === "desc" ? -1 : 1;
+
+    const users = await usermodel.find().sort({ Name: sortOrder });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+

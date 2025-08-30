@@ -30,22 +30,28 @@ module.exports.getOne = async (req, res) => {
 // POST (ajout panier)
 module.exports.addPanier = async (req, res) => {
     try {
-        const { produit, user, prix } = req.body;
+        const { produit, user } = req.body; // on ne prend plus "prix"
 
         // Vérifier que le produit et l'user existent
         const produitExist = await Produit.findById(produit);
         const userExist = await User.findById(user);
+
         if (!produitExist || !userExist) {
             return res.status(400).json({ message: "Produit ou User invalide" });
         }
 
+        // Récupérer le prix depuis le produit
+        const prix = produitExist.prix; 
+
         const newPanier = new Panier({ produit, user, prix });
         const savedPanier = await newPanier.save();
+
         res.status(201).json(savedPanier);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // PUT (modifier panier)
 module.exports.updatePanier = async (req, res) => {
