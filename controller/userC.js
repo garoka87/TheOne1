@@ -1,4 +1,5 @@
 const usermodel = require("../model/usermodel");
+const bcrypt = require("bcrypt");
 
 // ✅ READ ALL
 module.exports.getAll = async (req, res) => {
@@ -31,6 +32,42 @@ module.exports.Adduser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// ✅ LOGIN
+module.exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Vérifier si l'email existe
+    const user = await usermodel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "Email introuvable" });
+    }
+
+    // Vérifier le mot de passe
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Mot de passe incorrect" });
+    }
+
+    // Générer un token JWT
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET || "secret123", // secret à mettre dans .env
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({
+      message: "Connexion réussie",
+      user,
+      token
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+const jwt = require("jsonwebtoken");
 
 // ✅ UPDATE
 module.exports.update = async (req, res) => {
@@ -74,6 +111,7 @@ module.exports.searchByName = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 // ✅ TRIER par Name

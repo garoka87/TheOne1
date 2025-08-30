@@ -16,7 +16,7 @@ router.delete("/delete/:id", userController.Delete);
 router.get("/rech/:Name", userController.searchByName);
 router.get("/triee/:order", userController.sortByName);
 router.get("/triee", userController.sortByName);
-
+router.post("/login", userController.login);
 
 
 
